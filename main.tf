@@ -235,7 +235,7 @@ resource "aws_lb_listener_rule" "redirect_http_to_https" {
 ###################
 module "alb_https_sg" {
   source  = "terraform-aws-modules/security-group/aws//modules/https-443"
-  version = "v2.11.0"
+  version = "v3.0.1"
 
   name        = "${var.name}-alb-https"
   vpc_id      = local.vpc_id
@@ -248,7 +248,7 @@ module "alb_https_sg" {
 
 module "alb_http_sg" {
   source  = "terraform-aws-modules/security-group/aws//modules/http-80"
-  version = "v2.9.0"
+  version = "v3.0.1"
 
   name        = "${var.name}-alb-http"
   vpc_id      = local.vpc_id
@@ -261,7 +261,7 @@ module "alb_http_sg" {
 
 module "atlantis_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "v2.11.0"
+  version = "v3.0.1"
 
   name        = var.name
   vpc_id      = local.vpc_id
