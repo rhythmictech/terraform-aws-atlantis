@@ -144,7 +144,7 @@ resource "aws_ssm_parameter" "atlantis_bitbucket_user_token" {
 ###################
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "v1.53.0"
+  version = "v2.5.0"
 
   create_vpc = var.vpc_id == ""
 
