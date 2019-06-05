@@ -289,9 +289,9 @@ module "atlantis_sg" {
 ###################
 module "acm" {
   source  = "terraform-aws-modules/acm/aws"
-  version = "v1.1.0"
+  version = "v2.0.0"
 
-  create_certificate = var.certificate_arn == "" ? 1 : 0
+  create_certificate = var.certificate_arn == "" ? true : false
 
   domain_name = var.acm_certificate_domain_name == "" ? join(".", [var.name, var.route53_zone_name]) : var.acm_certificate_domain_name
 
