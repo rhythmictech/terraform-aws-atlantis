@@ -170,7 +170,7 @@ module "alb" {
   load_balancer_name = var.name
 
   vpc_id          = local.vpc_id
-  subnets         = [local.public_subnet_ids]
+  subnets         = local.public_subnet_ids
   security_groups = [module.alb_https_sg.this_security_group_id, module.alb_http_sg.this_security_group_id]
 
   logging_enabled     = var.alb_logging_enabled
@@ -504,23 +504,7 @@ resource "aws_ecs_service" "atlantis" {
   deployment_minimum_healthy_percent = var.ecs_service_deployment_minimum_healthy_percent
 
   network_configuration {
-    # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-    # force an interpolation expression to be interpreted as a list by wrapping it
-    # in an extra set of list brackets. That form was supported for compatibilty in
-    # v0.11, but is no longer supported in Terraform v0.12.
-    #
-    # If the expression in the following list itself returns a list, remove the
-    # brackets to avoid interpretation as a list of lists. If the expression
-    # returns a single list item then leave it as-is and remove this TODO comment.
-    subnets = [local.private_subnet_ids]
-    # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-    # force an interpolation expression to be interpreted as a list by wrapping it
-    # in an extra set of list brackets. That form was supported for compatibilty in
-    # v0.11, but is no longer supported in Terraform v0.12.
-    #
-    # If the expression in the following list itself returns a list, remove the
-    # brackets to avoid interpretation as a list of lists. If the expression
-    # returns a single list item then leave it as-is and remove this TODO comment.
+    subnets = local.private_subnet_ids
     security_groups = [module.atlantis_sg.this_security_group_id]
     assign_public_ip = var.ecs_service_assign_public_ip
   }
