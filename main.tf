@@ -165,8 +165,7 @@ module "vpc" {
 # ALB
 ###################
 module "alb" {
-  source  = "terraform-aws-modules/alb/aws"
-  version = "v3.5.0"
+  source  = "git::https://github.com/rhythmictech/terraform-aws-alb.git?ref=0.12"
 
   load_balancer_name = var.name
 
