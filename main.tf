@@ -427,10 +427,10 @@ module "container_definition_github_gitlab" {
     "awslogs-stream-prefix" = "ecs"
   }
 
-  environment = [concat(
+  environment = concat(
     local.container_definition_environment,
     var.custom_environment_variables,
-  )]
+  )
 
   secrets = concat(
     local.container_definition_secrets_1,
@@ -463,10 +463,10 @@ module "container_definition_bitbucket" {
     "awslogs-stream-prefix" = "ecs"
   }
 
-  environment = [concat(
+  environment = concat(
     local.container_definition_environment,
     var.custom_environment_variables,
-  )]
+  )
 
   secrets = concat(
     local.container_definition_secrets_1,
