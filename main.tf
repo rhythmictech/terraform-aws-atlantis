@@ -303,7 +303,7 @@ module "acm" {
 # Route53 record
 ###################
 resource "aws_route53_record" "atlantis" {
-  count = var.create_route53_record
+  count = var.create_route53_record ? 1 : 0
 
   zone_id = data.aws_route53_zone.this[0].zone_id
   name    = var.name
@@ -432,11 +432,11 @@ module "container_definition_github_gitlab" {
     var.custom_environment_variables,
   )]
 
-  secrets = [concat(
+  secrets = concat(
     local.container_definition_secrets_1,
     local.container_definition_secrets_2,
     var.custom_environment_secrets,
-  )]
+  )
 }
 
 module "container_definition_bitbucket" {
@@ -468,10 +468,10 @@ module "container_definition_bitbucket" {
     var.custom_environment_variables,
   )]
 
-  secrets = [concat(
+  secrets = concat(
     local.container_definition_secrets_1,
     var.custom_environment_secrets,
-  )]
+  )
 }
 
 resource "aws_ecs_task_definition" "atlantis" {
