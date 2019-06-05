@@ -16,13 +16,13 @@ variable "vpc_id" {
 
 variable "public_subnet_ids" {
   description = "A list of IDs of existing public subnets inside the VPC"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "private_subnet_ids" {
   description = "A list of IDs of existing private subnets inside the VPC"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -33,44 +33,44 @@ variable "cidr" {
 
 variable "azs" {
   description = "A list of availability zones in the region"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "public_subnets" {
   description = "A list of public subnets inside the VPC"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "private_subnets" {
   description = "A list of private subnets inside the VPC"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 # ALB
 variable "alb_ingress_cidr_blocks" {
   description = "List of IPv4 CIDR ranges to use on all ingress rules of the ALB."
-  type        = "list"
+  type        = list(string)
   default     = ["0.0.0.0/0"]
 }
 
 variable "alb_log_bucket_name" {
   description = "S3 bucket (externally created) for storing load balancer access logs. Required if alb_logging_enabled is true."
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "alb_log_location_prefix" {
   description = "S3 prefix within the log_bucket_name under which logs are stored."
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "alb_logging_enabled" {
   description = "Controls if the ALB will log requests to S3."
-  type        = "string"
+  type        = string
   default     = false
 }
 
@@ -136,7 +136,7 @@ variable "ecs_service_assign_public_ip" {
 
 variable "policies_arn" {
   description = "A list of the ARN of the policies you want to apply"
-  type        = "list"
+  type        = list(string)
   default     = ["arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"]
 }
 
@@ -193,18 +193,18 @@ variable "atlantis_port" {
 
 variable "atlantis_repo_whitelist" {
   description = "List of allowed repositories Atlantis can be used with"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "atlantis_allowed_repo_names" {
   description = "Github repositories where webhook should be created"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "allow_repo_config" {
   description = "When true allows the use of atlantis.yaml config files within the source repos."
-  type        = "string"
+  type        = string
   default     = "false"
 }
 
@@ -256,3 +256,4 @@ variable "custom_environment_variables" {
   description = "List of additional environment variables the container will use (list should contain maps with `name` and `value`)"
   default     = []
 }
+
