@@ -287,7 +287,9 @@ module "atlantis_sg" {
 # ACM (SSL certificate)
 ###################
 module "acm" {
-  source  = "terraform-aws-modules/acm/aws"
+#  source  = "terraform-aws-modules/acm/aws"
+  # pending merge of https://github.com/terraform-aws-modules/terraform-aws-acm/pull/28
+  source = "git::https://github.com/rhythmictech/terraform-aws-acm.git?ref=master"
   version = "v2.0.0"
 
   create_certificate = var.certificate_arn == ""
